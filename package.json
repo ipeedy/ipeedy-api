@@ -1,0 +1,22 @@
+{
+  "name": "ipeedy-api",
+  "version": "1.0.0",
+  "description": "Ipeedy API using GraphQL and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkdev98/ipeedy-api.git"
+  },
+  "keywords": [
+    "ipeedy"
+  ],
+  "author": "bkdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bkdev98/ipeedy-api/issues"
+  },
+  "homepage": "https://github.com/bkdev98/ipeedy-api#readme"
+}
