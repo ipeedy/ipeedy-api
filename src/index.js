@@ -12,14 +12,14 @@ app.listen(constants.PORT, err => {
   if (err) {
     console.log(err);
     notifier.notify({
-      'title': 'Inspery API',
-      'message': 'Service failed to start!',
+      title: 'Inspery API',
+      message: 'Service failed to start!',
     });
   } else {
     console.log(`Ipeedy API is up on port ${constants.PORT}!`);
     notifier.notify({
-      'title': 'Inspery API',
-      'message': 'Service started!',
+      title: 'Inspery API',
+      message: 'Service started!',
     });
   }
 });
