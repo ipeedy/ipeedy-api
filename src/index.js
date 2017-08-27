@@ -1,8 +1,12 @@
+/* eslint-disable no-console */
+
 import express from 'express';
 import notifier from 'node-notifier';
 
 import constants from './config/constants';
 import middlewares from './config/middlewares';
+
+import './config/database';
 
 const app = express();
 
