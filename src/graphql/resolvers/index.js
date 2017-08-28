@@ -7,5 +7,6 @@ export default {
   },
   Mutation: {
     generateOTP: UserResolvers.generateOTP,
+    verifyOTP: UserResolvers.verifyOTP,
   },
 };

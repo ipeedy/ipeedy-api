@@ -1,9 +1,15 @@
 export default `
   scalar Date
 
-  type Status {
+  type GenerateOTPStatus {
     error: Boolean!
     message: String
+  }
+
+  type VerifyOTPStatus {
+    error: Boolean
+    message: String
+    token: String
   }
 
   type AuthCode {
@@ -41,7 +47,8 @@ export default `
   }
 
   type Mutation {
-    generateOTP(phone: String!): Status
+    generateOTP(phone: String!): GenerateOTPStatus
+    verifyOTP(phone: String!, code: String!): VerifyOTPStatus
   }
 
   schema {

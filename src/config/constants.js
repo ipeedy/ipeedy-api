@@ -5,6 +5,7 @@ const devConfig = {
   ESMS_API_URL: 'https://59588a4fea985b08e80959b9.koor.io/requestOTP',
   ESMS_API_KEY: 'THISISESMSAPIKEY',
   ESMS_SECRET_KEY: 'THISISESMSSECRETKEY',
+  JWT_SECRET: '부이탄콰',
 };
 
 const testConfig = {};

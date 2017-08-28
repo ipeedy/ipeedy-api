@@ -2,7 +2,9 @@
 
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
+import jwt from 'jsonwebtoken';
 
+import constants from '../config/constants';
 import { requestOTP } from '../services/otp';
 
 const UserSchema = new Schema(
@@ -50,9 +52,9 @@ const UserSchema = new Schema(
 );
 
 UserSchema.methods = {
-  async generateOTP(phone) {
+  async generateOTP() {
     try {
-      const result = await requestOTP(phone);
+      const result = await requestOTP(this.phone);
       if (result.CodeResult !== '100') {
         return {
           error: true,
@@ -73,6 +75,26 @@ UserSchema.methods = {
     } catch (error) {
       throw error;
     }
+  },
+  async verifyOTP(code) {
+    try {
+      if (!this.authCode.codeValid || this.authCode.code.toString() !== code) {
+        return {
+          error: true,
+          message: 'Verify OTP failed!',
+        };
+      }
+      this.authCode.codeValid = false;
+      await this.save();
+      return {
+        token: this.createToken(),
+      };
+    } catch (error) {
+      throw error;
+    }
+  },
+  createToken() {
+    return jwt.sign({ _id: this._id }, constants.JWT_SECRET);
   },
 };
 
