@@ -1,4 +1,4 @@
-export default`
+export default `
   scalar Date
 
   input GeometryInput {
@@ -68,7 +68,10 @@ export default`
   }
 
   type Query {
+    getProduct(_id: ID!): Product
     getProducts: [Product]
+    getUserProducts: [Product]
+    getNearbyProducts(latitude: Int!, longitude: Int!, distance: Int): [Product]
     me: Me
   }
 

@@ -2,16 +2,19 @@ import mongoose, { Schema } from 'mongoose';
 import slug from 'slug';
 import shortid from 'shortid';
 
-const GeoSchema = new Schema({
-  type: {
-    type: String,
-    default: 'point',
+const GeoSchema = new Schema(
+  {
+    type: {
+      type: String,
+      default: 'point',
+    },
+    coordinates: {
+      type: [Number],
+      index: '2dsphere',
+    },
   },
-  coordinates: {
-    type: [Number],
-    index: '2dsphere',
-  },
-}, { timestamps: true });
+  { timestamps: true },
+);
 
 const ProductSchema = new Schema(
   {

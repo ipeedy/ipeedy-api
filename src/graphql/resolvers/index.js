@@ -11,7 +11,10 @@ export default {
     user: ({ user }) => User.findById(user),
   },
   Query: {
+    getProduct: ProductResolvers.getProduct,
     getProducts: ProductResolvers.getProducts,
+    getUserProducts: ProductResolvers.getUserProducts,
+    getNearbyProducts: ProductResolvers.getNearbyProducts,
     me: UserResolvers.me,
   },
   Mutation: {
