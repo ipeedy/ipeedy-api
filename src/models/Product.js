@@ -1,4 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
+import slug from 'slug';
+import shortid from 'shortid';
 
 const ProductSchema = new Schema(
   {
@@ -30,6 +32,10 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
     totalRating: {
       type: Number,
       default: 0,
@@ -47,5 +53,16 @@ const ProductSchema = new Schema(
     timestamps: true,
   },
 );
+
+ProductSchema.pre('validate', function(next) {
+  this._slugify();
+  next();
+});
+
+ProductSchema.methods = {
+  _slugify() {
+    this.slug = slug(`${this.name.toLowerCase()}${shortid.generate()}`);
+  },
+};
 
 export default mongoose.model('Product', ProductSchema);

@@ -46,6 +46,7 @@ export default `
     description: String!
     price: Int!
     images: [String]
+    user: User!
     totalRating: Int
     ratedTimes: Int
     favoriteCount: Int
@@ -61,6 +62,8 @@ export default `
   type Mutation {
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
+    updateInfo(name: String!, email: String!, avatar: String): Me
+    createProduct(name: String!, description: String!, price: Int!, images: [String]): Product
   }
 
   schema {

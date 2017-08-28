@@ -47,4 +47,15 @@ export default {
       throw error;
     }
   },
+  updateInfo: async (_, args, { user }) => {
+    try {
+      const me = await requireAuth(user);
+      Object.entries(args).forEach(([key, value]) => {
+        if (value) me[key] = value;
+      });
+      return me.save();
+    } catch (error) {
+      throw error;
+    }
+  },
 };

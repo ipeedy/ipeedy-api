@@ -17,6 +17,16 @@ export async function requireAuth(user) {
   return me;
 }
 
+export async function requireInfo(user) {
+  const me = await User.findById(user._id);
+
+  if (!me.name || !me.email) {
+    throw new Error('Missing info!');
+  }
+
+  return;
+}
+
 export function decodeToken(token) {
   const arr = token.split(' ');
 
