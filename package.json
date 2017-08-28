@@ -22,13 +22,15 @@
   "homepage": "https://github.com/bkdev98/ipeedy-api#readme",
   "dependencies": {
     "apollo-server-express": "^1.1.2",
+    "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "cross-env": "^5.0.5",
     "express": "^4.15.4",
     "graphql": "^0.11.1",
     "graphql-date": "^1.0.3",
     "graphql-tools": "^1.2.1",
-    "mongoose": "^4.11.8"
+    "mongoose": "^4.11.8",
+    "validator": "^8.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
