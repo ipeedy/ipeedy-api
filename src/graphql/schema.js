@@ -1,5 +1,10 @@
-export default `
+export default`
   scalar Date
+
+  input GeometryInput {
+    type: String
+    coordinates: [Int]!
+  }
 
   type GenerateOTPStatus {
     error: Boolean!
@@ -15,6 +20,13 @@ export default `
   type AuthCode {
     code: Int
     generatedAt: Date!
+  }
+
+  type Geometry {
+    type: String!
+    coordinates: [Int]!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Me {
@@ -44,6 +56,7 @@ export default `
     name: String!
     slug: String
     description: String!
+    geometry: Geometry!
     price: Int!
     images: [String]
     user: User!
@@ -63,7 +76,7 @@ export default `
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
     updateInfo(name: String!, email: String!, avatar: String): Me
-    createProduct(name: String!, description: String!, price: Int!, images: [String]): Product
+    createProduct(name: String!, description: String!, price: Int!, images: [String], geometry: GeometryInput!): Product
   }
 
   schema {
