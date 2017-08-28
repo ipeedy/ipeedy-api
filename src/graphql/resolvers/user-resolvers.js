@@ -1,4 +1,5 @@
 import User from '../../models/User';
+import { requireAuth } from '../../services/auth';
 
 export default {
   generateOTP: async (_, { phone }) => {
@@ -35,6 +36,13 @@ export default {
         };
       }
       return user.verifyOTP(code);
+    } catch (error) {
+      throw error;
+    }
+  },
+  me: async (_, args, { user }) => {
+    try {
+      return await requireAuth(user);
     } catch (error) {
       throw error;
     }

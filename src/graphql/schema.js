@@ -17,9 +17,20 @@ export default `
     generatedAt: Date!
   }
 
+  type Me {
+    _id: ID!
+    phone: String!
+    name: String
+    email: String
+    avatar: String
+    authCode: AuthCode
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
   type User {
     _id: ID!
-    phone: Int!
+    phone: String!
     name: String
     email: String
     avatar: String
@@ -44,6 +55,7 @@ export default `
 
   type Query {
     getProducts: [Product]
+    me: Me
   }
 
   type Mutation {
