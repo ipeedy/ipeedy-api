@@ -22,5 +22,7 @@ export default {
     verifyOTP: UserResolvers.verifyOTP,
     updateInfo: UserResolvers.updateInfo,
     createProduct: ProductResolvers.createProduct,
+    updateProduct: ProductResolvers.updateProduct,
+    deleteProduct: ProductResolvers.deleteProduct,
   },
 };

@@ -56,4 +56,35 @@ export default {
       throw error;
     }
   },
+  updateProduct: async (_, { _id, ...rest }, { user }) => {
+    try {
+      await requireAuth(user);
+      const product = await Product.findOne({ _id, user: user._id });
+      if (!product) {
+        throw new Error('Not found!');
+      }
+      Object.entries(rest).forEach(([key, value]) => {
+        product[key] = value;
+      });
+
+      return product.save();
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteProduct: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      const product = await Product.findOne({ _id, user: user._id });
+      if (!product) {
+        throw new Error('Not found!');
+      }
+      await product.remove();
+      return {
+        message: 'Delete success!',
+      };
+    } catch (error) {
+      throw error;
+    }
+  },
 };

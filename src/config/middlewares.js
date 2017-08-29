@@ -8,6 +8,7 @@ import constants from '../config/constants';
 import typeDefs from '../graphql/schema';
 import resolvers from '../graphql/resolvers';
 import { decodeToken } from '../services/auth';
+// import mocks from '../mocks';
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -29,7 +30,8 @@ async function auth(req, res, next) {
   }
 }
 
-export default app => {
+export default async app => {
+  // await mocks();
   app.use(bodyParser.json());
   app.use(auth);
   app.use(

@@ -3,7 +3,7 @@ export default `
 
   input GeometryInput {
     type: String
-    coordinates: [Int]!
+    coordinates: [Float]!
   }
 
   type GenerateOTPStatus {
@@ -17,14 +17,13 @@ export default `
     token: String
   }
 
-  type AuthCode {
-    code: Int
-    generatedAt: Date!
+  type Status {
+    message: String!
   }
 
   type Geometry {
     type: String!
-    coordinates: [Int]!
+    coordinates: [Float]!
     createdAt: Date!
     updatedAt: Date!
   }
@@ -35,7 +34,6 @@ export default `
     name: String
     email: String
     avatar: String
-    authCode: AuthCode
     createdAt: Date!
     updatedAt: Date!
   }
@@ -46,9 +44,13 @@ export default `
     name: String
     email: String
     avatar: String
-    authCode: AuthCode
     createdAt: Date!
     updatedAt: Date!
+  }
+
+  type ProductWithDistance {
+    dis: Float!
+    obj: Product
   }
 
   type Product {
@@ -57,7 +59,7 @@ export default `
     slug: String
     description: String!
     geometry: Geometry!
-    price: Int!
+    price: Float!
     images: [String]
     user: User!
     totalRating: Int
@@ -71,7 +73,7 @@ export default `
     getProduct(_id: ID!): Product
     getProducts: [Product]
     getUserProducts: [Product]
-    getNearbyProducts(latitude: Int!, longitude: Int!, distance: Int): [Product]
+    getNearbyProducts(latitude: Float!, longitude: Float!, distance: Float): [ProductWithDistance]
     me: Me
   }
 
@@ -79,7 +81,9 @@ export default `
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
     updateInfo(name: String!, email: String!, avatar: String): Me
-    createProduct(name: String!, description: String!, price: Int!, images: [String], geometry: GeometryInput!): Product
+    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!): Product
+    updateProduct(_id: ID!, name: String, description: String, price: Float, images: [String], geometry: GeometryInput): Product
+    deleteProduct(_id: ID!): Status
   }
 
   schema {

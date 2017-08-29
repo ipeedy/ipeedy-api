@@ -42,6 +42,7 @@
     "eslint": "^4.5.0",
     "eslint-config-equimper": "^2.2.1",
     "eslint-config-prettier": "^2.3.0",
+    "faker": "^4.1.0",
     "node-notifier": "^5.1.2",
     "nodemon": "^1.11.0",
     "prettier": "^1.5.3"
