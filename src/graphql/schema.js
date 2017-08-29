@@ -75,6 +75,8 @@ export default `
     getUserProducts: [Product]
     getNearbyProducts(latitude: Float!, longitude: Float!, distance: Float): [ProductWithDistance]
     me: Me
+    getUsers: [User]
+    getUser(_id: ID!): User
   }
 
   type Mutation {

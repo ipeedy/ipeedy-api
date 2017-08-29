@@ -58,4 +58,20 @@ export default {
       throw error;
     }
   },
+  getUsers: async (_, args, { user }) => {
+    try {
+      await requireAuth(user);
+      return User.find({}).sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  },
+  getUser: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      return User.findById(_id);
+    } catch (error) {
+      throw error;
+    }
+  },
 };

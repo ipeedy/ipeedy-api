@@ -16,6 +16,8 @@ export default {
     getUserProducts: ProductResolvers.getUserProducts,
     getNearbyProducts: ProductResolvers.getNearbyProducts,
     me: UserResolvers.me,
+    getUser: UserResolvers.getUser,
+    getUsers: UserResolvers.getUsers,
   },
   Mutation: {
     generateOTP: UserResolvers.generateOTP,
