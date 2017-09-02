@@ -13,14 +13,14 @@ export default {
       }
       const currentTime = new Date();
       const diffMins = Math.round(
-        (currentTime - user.authCode.generatedAt) % 86400000 % 3600000 / 60000,
+        (currentTime - user.authCode.generatedAt) % 86400000 % 3600000 / 1000,
       );
-      if (diffMins >= 15) {
+      if (diffMins >= 30) {
         return await user.generateOTP();
       }
       return {
         error: true,
-        message: `Try again after ${15 - diffMins} minutes!`,
+        message: `Try again after ${30 - diffMins} seconds!`,
       };
     } catch (error) {
       throw error;
