@@ -72,6 +72,7 @@ UserSchema.methods = {
       return {
         error: false,
         message: 'OK!',
+        diff_time: 30,
       };
     } catch (error) {
       throw error;

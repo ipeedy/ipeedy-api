@@ -12,21 +12,21 @@ export default {
         return await user.generateOTP();
       }
       const currentTime = new Date();
-      const diffMins = Math.round(
+      const diffSeconds = Math.round(
         (currentTime - user.authCode.generatedAt) % 86400000 % 3600000 / 1000,
       );
-      if (diffMins >= 30) {
+      if (diffSeconds >= 30) {
         return await user.generateOTP();
       }
       return {
-        error: true,
-        message: `Try again after ${30 - diffMins} seconds!`,
+        error: false,
+        diff_time: 30 - diffSeconds,
       };
     } catch (error) {
       return {
         error: true,
         message: error.errors.phone.message,
-      }
+      };
     }
   },
   verifyOTP: async (_, { phone, code }) => {

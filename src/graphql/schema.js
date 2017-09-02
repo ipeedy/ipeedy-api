@@ -9,6 +9,7 @@ export default `
   type GenerateOTPStatus {
     error: Boolean!
     message: String
+    diff_time: Int
   }
 
   type VerifyOTPStatus {
