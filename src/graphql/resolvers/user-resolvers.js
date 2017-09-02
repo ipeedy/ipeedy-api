@@ -23,7 +23,10 @@ export default {
         message: `Try again after ${30 - diffMins} seconds!`,
       };
     } catch (error) {
-      throw error;
+      return {
+        error: true,
+        message: error.errors.phone.message,
+      }
     }
   },
   verifyOTP: async (_, { phone, code }) => {
