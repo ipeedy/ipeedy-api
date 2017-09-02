@@ -13,12 +13,12 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
       trim: true,
-      // validate: {
-      //   validator(phone) {
-      //     return validator.isMobilePhone(phone, 'vi-VN');
-      //   },
-      //   message: '{VALUE} is not a valid phone number!',
-      // },
+      validate: {
+        validator(phone) {
+          return validator.isMobilePhone(phone, 'vi-VN');
+        },
+        message: '{VALUE} is not a valid phone number!',
+      },
       required: true,
     },
     name: {
@@ -30,8 +30,9 @@ const UserSchema = new Schema(
     avatar: String,
     email: {
       type: String,
-      unique: true,
       trim: true,
+      unique: true,
+      sparse: true,
       validate: {
         validator(email) {
           return validator.isEmail(email);
