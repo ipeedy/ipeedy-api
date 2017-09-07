@@ -16,6 +16,27 @@ const GeoSchema = new Schema(
   { timestamps: true },
 );
 
+const Review = new Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    text: {
+      type: String,
+      trim: true,
+      required: true,
+      minlength: [10, 'Review need to be longer!'],
+      maxlength: [100, 'Review need to be shorter!'],
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true },
+);
+
 const ProductSchema = new Schema(
   {
     name: {
@@ -34,7 +55,7 @@ const ProductSchema = new Schema(
       required: true,
       trim: true,
       minlength: [10, 'Description need to be longer!'],
-      maxlength: [100, 'Description need to be shorter!'],
+      maxlength: [200, 'Description need to be shorter!'],
     },
     images: [
       {
@@ -51,14 +72,15 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    totalRating: {
+    soldCount: {
       type: Number,
       default: 0,
     },
-    ratedTimes: {
+    availableCount: {
       type: Number,
       default: 0,
     },
+    reviews: [Review],
     favoriteCount: {
       type: Number,
       default: 0,

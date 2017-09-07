@@ -10,6 +10,9 @@ export default {
   Product: {
     user: ({ user }) => User.findById(user),
   },
+  Review: {
+    user: ({ user }) => User.findById(user),
+  },
   Query: {
     getProduct: ProductResolvers.getProduct,
     getProducts: ProductResolvers.getProducts,

@@ -29,6 +29,14 @@ export default `
     updatedAt: Date!
   }
 
+  type Review {
+    user: User!
+    text: String!
+    rating: Float!
+    updatedAt: Date!
+    createdAt: Date!
+  }
+
   type Me {
     _id: ID!
     phone: String!
@@ -63,8 +71,9 @@ export default `
     price: Float!
     images: [String]
     user: User!
-    totalRating: Int
-    ratedTimes: Int
+    reviews: [Review]
+    soldCount: Int
+    availableCount: Int
     favoriteCount: Int
     createdAt: Date!
     updatedAt: Date!
