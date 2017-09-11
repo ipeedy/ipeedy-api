@@ -19,7 +19,8 @@ export default `
   }
 
   type Status {
-    message: String!
+    error: Boolean
+    message: String
   }
 
   type Geometry {
@@ -92,8 +93,8 @@ export default `
   type Mutation {
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
-    updateInfo(name: String!, email: String!, avatar: String): Me
-    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!): Product
+    updateInfo(name: String, email: String, avatar: String): Status
+    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int): Product
     updateProduct(_id: ID!, name: String, description: String, price: Float, images: [String], geometry: GeometryInput): Product
     deleteProduct(_id: ID!): Status
   }

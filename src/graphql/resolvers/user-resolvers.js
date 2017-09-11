@@ -56,9 +56,16 @@ export default {
       Object.entries(args).forEach(([key, value]) => {
         if (value) me[key] = value;
       });
-      return me.save();
+      await me.save();
+      return {
+        error: false,
+        message: 'Info updated!',
+      };
     } catch (error) {
-      throw error;
+      return {
+        error: true,
+        message: 'Somethings went wrong!',
+      };
     }
   },
   getUsers: async (_, args, { user }) => {
