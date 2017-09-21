@@ -80,6 +80,12 @@ const ProductSchema = new Schema(
       type: Number,
       default: 0,
     },
+    orderRange: [
+      {
+        type: Number,
+        default: [1, 10],
+      },
+    ],
     reviews: [Review],
     favoriteCount: {
       type: Number,

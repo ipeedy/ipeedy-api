@@ -1,11 +1,13 @@
+import config from './config.json';
+
 const devConfig = {
   PORT: process.env.PORT || 3000,
   DB_URL: 'mongodb://localhost/ipeedy',
   GRAPHQL_PATH: '/graphql',
-  ESMS_API_URL: 'https://59588a4fea985b08e80959b9.koor.io/requestOTP',
-  ESMS_API_KEY: 'THISISESMSAPIKEY',
-  ESMS_SECRET_KEY: 'THISISESMSSECRETKEY',
-  JWT_SECRET: '부이탄콰',
+  ESMS_API_URL: config.ESMS_API_URL,
+  ESMS_API_KEY: config.ESMS_API_KEY,
+  ESMS_SECRET_KEY: config.ESMS_SECRET_KEY,
+  JWT_SECRET: config.JWT_SECRET,
 };
 
 const testConfig = {};

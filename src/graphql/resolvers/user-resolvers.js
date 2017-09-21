@@ -54,7 +54,7 @@ export default {
     try {
       const me = await requireAuth(user);
       Object.entries(args).forEach(([key, value]) => {
-        if (value) me[key] = value;
+        if (value && value.length) me[key] = value;
       });
       await me.save();
       return {
@@ -64,7 +64,7 @@ export default {
     } catch (error) {
       return {
         error: true,
-        message: 'Somethings went wrong!',
+        message: error.message,
       };
     }
   },

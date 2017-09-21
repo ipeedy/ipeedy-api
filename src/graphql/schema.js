@@ -71,6 +71,7 @@ export default `
     geometry: Geometry!
     price: Float!
     images: [String]
+    orderRange: [Int]
     user: User!
     reviews: [Review]
     soldCount: Int
@@ -94,8 +95,8 @@ export default `
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
     updateInfo(name: String, email: String, avatar: String): Status
-    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int): Product
-    updateProduct(_id: ID!, name: String, description: String, price: Float, images: [String], geometry: GeometryInput): Product
+    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int, orderRange: [Int]): Product
+    updateProduct(_id: ID!, name: String, description: String, price: Float, images: [String], geometry: GeometryInput, orderRange: [Int]): Product
     deleteProduct(_id: ID!): Status
   }
 
