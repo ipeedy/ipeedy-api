@@ -51,7 +51,7 @@ export default {
       await requireAuth(user);
       await requireInfo(user);
 
-      return await Product.create({ ...args, user: user._id });
+      return Product.create({ ...args, user: user._id });
     } catch (error) {
       throw error;
     }

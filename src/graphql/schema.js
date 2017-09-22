@@ -67,6 +67,7 @@ export default `
     _id: ID!
     name: String!
     slug: String
+    category: Category
     description: String!
     geometry: Geometry!
     price: Float!
@@ -81,6 +82,17 @@ export default `
     updatedAt: Date!
   }
 
+  type Category {
+    _id: ID!
+    name: String!
+    user: User!
+    image: String
+    icon: String
+    products: [Product]
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
   type Query {
     getProduct(_id: ID!): Product
     getProducts: [Product]
@@ -89,15 +101,20 @@ export default `
     me: Me
     getUsers: [User]
     getUser(_id: ID!): User
+    getCategories: [Category]
+    getCategory(_id: ID!): Category
   }
 
   type Mutation {
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
     updateInfo(name: String, email: String, avatar: String): Status
-    createProduct(name: String!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int, orderRange: [Int]): Product
-    updateProduct(_id: ID!, name: String, description: String, price: Float, images: [String], geometry: GeometryInput, orderRange: [Int]): Product
+    createProduct(name: String!, category: ID!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int, orderRange: [Int]): Product
+    updateProduct(_id: ID!, category: ID, name: String, description: String, price: Float, images: [String], geometry: GeometryInput, orderRange: [Int]): Product
     deleteProduct(_id: ID!): Status
+    createCategory(name: String!, image: String, icon: String): Category
+    updateCategory(_id: ID!, name: String, image: String, icon: String): Category
+    deleteCategory(_id: ID!): Status
   }
 
   schema {
