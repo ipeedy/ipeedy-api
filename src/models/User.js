@@ -7,20 +7,37 @@ import jwt from 'jsonwebtoken';
 import constants from '../config/constants';
 import { requestOTP } from '../services/otp';
 
+import Product from './Product';
+
+const GeoSchema = new Schema(
+  {
+    type: {
+      type: String,
+      default: 'point',
+    },
+    coordinates: {
+      type: [Number],
+      index: '2dsphere',
+    },
+  },
+  { timestamps: true },
+);
+
 const UserSchema = new Schema(
   {
     phone: {
       type: String,
       unique: true,
       trim: true,
-      validate: {
-        validator(phone) {
-          return validator.isMobilePhone(phone, 'vi-VN');
-        },
-        message: '{VALUE} is not a valid phone number!',
-      },
+      // validate: {
+      //   validator(phone) {
+      //     return validator.isMobilePhone(phone, 'vi-VN');
+      //   },
+      //   message: '{VALUE} is not a valid phone number!',
+      // },
       required: true,
     },
+    geometry: GeoSchema,
     name: {
       type: String,
       trim: true,
@@ -99,5 +116,15 @@ UserSchema.methods = {
     return jwt.sign({ _id: this._id }, constants.JWT_SECRET);
   },
 };
+
+UserSchema.pre('save', async function(next) {
+  if (this.isModified('geometry')) {
+    console.log('====================================');
+    console.log('geo changed');
+    console.log('====================================');
+    await Product.find({ user: this._id }).update({ geometry: this.geometry });
+  }
+  next();
+});
 
 export default mongoose.model('User', UserSchema);

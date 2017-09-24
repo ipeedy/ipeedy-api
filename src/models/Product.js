@@ -57,6 +57,7 @@ const ProductSchema = new Schema(
       type: String,
       unique: true,
     },
+    geometry: GeoSchema,
     description: {
       type: String,
       required: true,
@@ -70,7 +71,6 @@ const ProductSchema = new Schema(
         trim: true,
       },
     ],
-    geometry: GeoSchema,
     price: {
       type: Number,
       required: true,

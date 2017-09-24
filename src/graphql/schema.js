@@ -41,6 +41,7 @@ export default `
   type Me {
     _id: ID!
     phone: String!
+    geometry: Geometry
     name: String
     email: String
     avatar: String
@@ -51,6 +52,7 @@ export default `
   type User {
     _id: ID!
     phone: String!
+    geometry: Geometry
     name: String
     email: String
     avatar: String
@@ -68,8 +70,8 @@ export default `
     name: String!
     slug: String
     category: Category
+    geometry: Geometry
     description: String!
-    geometry: Geometry!
     price: Float!
     images: [String]
     orderRange: [Int]
@@ -109,8 +111,9 @@ export default `
     generateOTP(phone: String!): GenerateOTPStatus
     verifyOTP(phone: String!, code: String!): VerifyOTPStatus
     updateInfo(name: String, email: String, avatar: String): Status
-    createProduct(name: String!, category: ID!, description: String!, price: Float!, images: [String], geometry: GeometryInput!, availableCount: Int, orderRange: [Int]): Product
-    updateProduct(_id: ID!, category: ID, name: String, description: String, price: Float, images: [String], geometry: GeometryInput, orderRange: [Int]): Product
+    updateLocation(geometry: GeometryInput!): Status
+    createProduct(name: String!, category: ID!, description: String!, price: Float!, images: [String], availableCount: Int, orderRange: [Int], geometry: GeometryInput): Product
+    updateProduct(_id: ID!, category: ID, name: String, description: String, price: Float, images: [String], orderRange: [Int], geometry: GeometryInput): Product
     deleteProduct(_id: ID!): Status
     createCategory(name: String!, image: String, icon: String): Category
     updateCategory(_id: ID!, name: String, image: String, icon: String): Category

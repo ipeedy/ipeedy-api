@@ -37,6 +37,7 @@ export default {
     generateOTP: UserResolvers.generateOTP,
     verifyOTP: UserResolvers.verifyOTP,
     updateInfo: UserResolvers.updateInfo,
+    updateLocation: UserResolvers.updateLocation,
     createProduct: ProductResolvers.createProduct,
     updateProduct: ProductResolvers.updateProduct,
     deleteProduct: ProductResolvers.deleteProduct,

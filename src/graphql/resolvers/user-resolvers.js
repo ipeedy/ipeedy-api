@@ -68,6 +68,22 @@ export default {
       };
     }
   },
+  updateLocation: async (_, { geometry }, { user }) => {
+    try {
+      const me = await requireAuth(user);
+      me.geometry = geometry;
+      await me.save();
+      return {
+        error: false,
+        message: 'Location updated!',
+      };
+    } catch (error) {
+      return {
+        error: true,
+        message: error.message,
+      };
+    }
+  },
   getUsers: async (_, args, { user }) => {
     try {
       await requireAuth(user);
