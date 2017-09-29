@@ -5,15 +5,13 @@
   "main": "index.js",
   "scripts": {
     "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'",
-    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bkdev98/ipeedy-api.git"
   },
-  "keywords": [
-    "ipeedy"
-  ],
+  "keywords": ["ipeedy"],
   "author": "bkdev",
   "license": "ISC",
   "bugs": {
