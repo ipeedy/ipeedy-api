@@ -13,7 +13,9 @@ const devConfig = {
 
 const testConfig = {};
 
-const prodConfig = {};
+const prodConfig = {
+  DB_URL: 'mongodb://163.44.192.90/ipeedy',
+};
 
 const defaultConfig = {
   PORT: process.env.PORT || 3000,
