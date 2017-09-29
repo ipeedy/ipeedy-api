@@ -1,9 +1,10 @@
 import config from './config.json';
 
 const devConfig = {
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 3001,
   DB_URL: 'mongodb://localhost/ipeedy',
   GRAPHQL_PATH: '/graphql',
+  SUBSCRIPTIONS_PATH: '/subscriptions',
   ESMS_API_URL: config.ESMS_API_URL,
   ESMS_API_KEY: config.ESMS_API_KEY,
   ESMS_SECRET_KEY: config.ESMS_SECRET_KEY,

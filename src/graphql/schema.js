@@ -23,6 +23,12 @@ export default `
     message: String
   }
 
+  type DeleteStatus {
+    error: Boolean
+    message: String
+    id: ID
+  }
+
   type Geometry {
     type: String!
     coordinates: [Float]!
@@ -95,9 +101,21 @@ export default `
     updatedAt: Date!
   }
 
+  type Order {
+    _id: ID!
+    product: Product!
+    user: User!
+    seller: User!
+    amount: Int
+    status: Int
+    createdAt: Date!
+    updatedAt: Date!
+  }
+
   type Query {
     getProduct(_id: ID!): Product
     getProducts: [Product]
+    getMostFavProducts: [Product]
     getUserProducts: [Product]
     getNearbyProducts(latitude: Float!, longitude: Float!, distance: Float): [ProductWithDistance]
     me: Me
@@ -105,6 +123,8 @@ export default `
     getUser(_id: ID!): User
     getCategories: [Category]
     getCategory(_id: ID!): Category
+    getOrders: [Order]
+    getOrder(_id: ID!): Order
   }
 
   type Mutation {
@@ -114,14 +134,21 @@ export default `
     updateLocation(geometry: GeometryInput!): Status
     createProduct(name: String!, category: ID!, description: String!, price: Float!, images: [String], availableCount: Int, orderRange: [Int], geometry: GeometryInput): Product
     updateProduct(_id: ID!, category: ID, name: String, description: String, price: Float, images: [String], orderRange: [Int], geometry: GeometryInput): Product
-    deleteProduct(_id: ID!): Status
+    deleteProduct(_id: ID!): DeleteStatus
     createCategory(name: String!, image: String, icon: String): Category
     updateCategory(_id: ID!, name: String, image: String, icon: String): Category
     deleteCategory(_id: ID!): Status
+    createOrder(product: ID, seller: ID, amount: Int): Order
+    updateOrderStatus(_id: ID!, status: Int!): Status
+  }
+
+  type Subscription {
+    orderCreated: Order
   }
 
   schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
   }
 `;

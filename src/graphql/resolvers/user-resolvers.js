@@ -25,7 +25,7 @@ export default {
     } catch (error) {
       return {
         error: true,
-        message: error.errors.phone.message,
+        message: error.message,
       };
     }
   },

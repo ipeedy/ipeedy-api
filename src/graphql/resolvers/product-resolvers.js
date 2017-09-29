@@ -10,6 +10,17 @@ export default {
       throw error;
     }
   },
+  getMostFavProducts: async (_, args, { user }) => {
+    try {
+      await requireAuth(user);
+      return Product.find({}).sort({
+        favoriteCount: 'descending',
+        createdAt: -1,
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
   getProduct: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
@@ -81,10 +92,16 @@ export default {
       }
       await product.remove();
       return {
+        error: false,
         message: 'Delete success!',
+        _id,
       };
     } catch (error) {
-      throw error;
+      return {
+        error: true,
+        message: error.message,
+        _id,
+      };
     }
   },
 };

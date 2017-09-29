@@ -1,13 +1,18 @@
 import faker from 'faker/locale/vi';
 
 import User from '../models/User';
-import Category from '../models/Category';
 import Product from '../models/Product';
 
-const USER_COORDINATE = [106.67903, 10.83651];
+const USER_COORDINATE = [106.629322, 10.853074];
 const USERS_TOTAL = 6;
-const CATEGORIES_TOTAL = 2;
-const PRODUCT_TOTAL = 3;
+const CATEGORIES = [
+  '59c8c7f1a197cd703073b8ce',
+  '59c8c7dfa197cd703073b8cd',
+  '59c8c7b7a197cd703073b8cc',
+  '59c8c742a197cd703073b8cb',
+  '59c8c499a197cd703073b8ca',
+];
+const TOPICS = ['food', 'drink', 'coffee', 'clothes', 'accessory'];
 
 function generateRandomPoint(center, radius) {
   const x0 = center[0];
@@ -32,8 +37,8 @@ function generateRandomPoint(center, radius) {
 export default async () => {
   try {
     // await User.remove();
-    await Product.remove();
-    await Category.remove();
+    // await Product.remove();
+    // await Category.remove();
 
     await Array.from({ length: USERS_TOTAL }).forEach(async () => {
       const user = await User.create({
@@ -51,49 +56,48 @@ export default async () => {
         },
       });
 
-      await Array.from({ length: CATEGORIES_TOTAL }).forEach(async () => {
-        const category = await Category.create({
-          name: faker.commerce.department(),
-          image: faker.image.food(),
-          icon:
-            'https://s3-ap-southeast-1.amazonaws.com/ipeedy/uploads/ipeedy.png',
-          user: user._id,
-        });
+      const minRange = Math.floor(Math.random() * 10 + 1);
+      const PRODUCT_TOTAL = Math.floor(Math.random() * 3 + 1);
 
-        await Array.from({ length: PRODUCT_TOTAL }).forEach(async () => {
-          await Product.create({
-            user: user._id,
-            name: faker.commerce.productName(),
-            category: category._id,
-            description: faker.lorem.sentences(4),
-            geometry: user.geometry,
-            images: [
-              faker.image.animals(),
-              faker.image.nature(),
-              faker.image.food(),
-            ],
-            price: faker.commerce.price(),
-            reviews: [
-              {
-                user: user._id,
-                text: faker.lorem.sentences(2),
-                rating: 4,
-              },
-              {
-                user: user._id,
-                text: faker.lorem.sentences(2),
-                rating: 3,
-              },
-              {
-                user: user._id,
-                text: faker.lorem.sentences(2),
-                rating: 5,
-              },
-            ],
-            orderRange: [1, 10],
-            availableCount: faker.random.number(100),
-            soldCount: faker.random.number(30),
-          });
+      await Array.from({ length: PRODUCT_TOTAL }).forEach(async () => {
+        await Product.create({
+          user: user._id,
+          name: faker.commerce.productName(),
+          category: CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)],
+          description: faker.lorem.sentences(4),
+          geometry: user.geometry,
+          images: [
+            `https://source.unsplash.com/random/640x460/?${TOPICS[
+              Math.floor(Math.random() * TOPICS.length)
+            ]}`,
+            `https://source.unsplash.com/random/640x460/?${TOPICS[
+              Math.floor(Math.random() * TOPICS.length)
+            ]}`,
+            `https://source.unsplash.com/random/640x460/?${TOPICS[
+              Math.floor(Math.random() * TOPICS.length)
+            ]}`,
+          ],
+          price: faker.commerce.price(),
+          reviews: [
+            {
+              user: user._id,
+              text: faker.lorem.sentences(2),
+              rating: 4,
+            },
+            {
+              user: user._id,
+              text: faker.lorem.sentences(2),
+              rating: 3,
+            },
+            {
+              user: user._id,
+              text: faker.lorem.sentences(2),
+              rating: 5,
+            },
+          ],
+          orderRange: [minRange, minRange + 20],
+          availableCount: faker.random.number(100),
+          soldCount: faker.random.number(30),
         });
       });
     });

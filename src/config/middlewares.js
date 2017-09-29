@@ -1,19 +1,9 @@
 /* eslint-disable no-param-reassign */
 
 import bodyParser from 'body-parser';
-import { makeExecutableSchema } from 'graphql-tools';
-import { graphqlExpress } from 'apollo-server-express';
 
-import constants from '../config/constants';
-import typeDefs from '../graphql/schema';
-import resolvers from '../graphql/resolvers';
 import { decodeToken } from '../services/auth';
 // import mocks from '../mocks';
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
 
 async function auth(req, res, next) {
   try {
@@ -34,13 +24,4 @@ export default async app => {
   // await mocks();
   app.use(bodyParser.json());
   app.use(auth);
-  app.use(
-    constants.GRAPHQL_PATH,
-    graphqlExpress(req => ({
-      schema,
-      context: {
-        user: req.user,
-      },
-    })),
-  );
 };
